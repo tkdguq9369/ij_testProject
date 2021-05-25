@@ -10,9 +10,20 @@
 
         <h1>스프링 부트로 시작하는 웹 서비스 Ver.2</h1>
         <div class="col-md-12">
+            <!-- 로그인 기능 영역-->
             <div class="row">
                 <div class="col-md-6">
                     <a href="/posts/save" role="button" class="btn btn-primary">글등록</a>
+                    {{#userName}} <!-- 해당 값이 존재하는 경우.-->
+                        Logged in as : <span id="user">{{userName}}</span>
+                        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                    {{/userName}}
+
+                    {{^userName}} <!-- 해당 값이 존재하지 않는 경우.-->
+                        <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Goole Login</a>
+                        <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                        <!--네이버url은 properties에 등록한 redirect-uri값에 맞춰 자동등록-->
+                    {{/userName}}
                 </div>
             </div>
             <br>
