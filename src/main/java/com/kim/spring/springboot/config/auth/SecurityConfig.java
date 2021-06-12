@@ -10,9 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity  // Spring security설정들을 활성화시켜줌.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomOAuth2UserService customOAuth2UserService;
+    protected void configure(HttpSecurity http) throws Exception{
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
         http
                 .csrf().disable()
                 .headers().frameOptions().disable() //h2-console화면을 사용하기위해 해동 옵션을 disable한다.
