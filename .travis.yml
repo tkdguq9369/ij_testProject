@@ -39,8 +39,8 @@ deploy:
     bucket: ksh-springboot-build #s3버킷
     key: ij_testProject.zip
     bundle_type: zip
-    application: springboot2-webservice # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
-    deployment_group: springboot2-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    application: ij_testProject # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션 springboot2-webservice
+    deployment_group: ij_testProject_group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
 
