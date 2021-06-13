@@ -20,7 +20,7 @@ script: "./gradlew clean build"
 before_deploy:
   - zip -r ij_testProject *
   - mkdir -p deploy
-  - mv ij_testProject.zip deploy/ij_testProject
+  - mv ij_testProject.zip deploy/ij_testProject.zip
 
 deploy:
   - provider: s3
