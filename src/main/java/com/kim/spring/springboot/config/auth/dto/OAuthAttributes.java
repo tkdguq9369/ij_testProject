@@ -55,7 +55,7 @@ public class OAuthAttributes {
 
     }
 
-    // User 엔티티 생성. 처음 가입할때 생성됨. 가입 기본권한을 GUEST로 줌.
+    // User 엔티티 생성. 처음 가입할때 생성됨. 가입 기본권한을 USER로 줌.
     public User toEntity() {
         return User.builder()
                 .name(name)
