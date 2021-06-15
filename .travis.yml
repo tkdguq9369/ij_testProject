@@ -13,7 +13,7 @@ before_install:
 cache:
   directories:
     - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
+      - '$HOME/.gradle'
 
 script: "./gradlew clean build"
 
