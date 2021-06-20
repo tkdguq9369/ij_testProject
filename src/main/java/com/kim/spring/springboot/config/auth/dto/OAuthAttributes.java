@@ -26,10 +26,9 @@ public class OAuthAttributes {
 
     // OAuth2User에서 반환하는 사용자정보가 MAP이기 때문에 값 하나하나 변환해야함.
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
-        if("naver".equals(registrationId)){
+        if ("naver".equals(registrationId)) {
             return ofNaver("id", attributes);
-        }
-        if("kakao".equals(registrationId)){
+        } else if ("kakao".equals(registrationId)) {
             return ofKakao("id", attributes);
         }
         return ofGoogle(userNameAttributeName, attributes);
@@ -59,12 +58,13 @@ public class OAuthAttributes {
     }
 
     private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
-        Map<String,Object> response = (Map<String, Object>)attributes.get("kakao_account");
+        Map<String, Object> response = (Map<String, Object>) attributes.get("kakao_account");
         Map<String, Object> profile = (Map<String, Object>) response.get("profile");
+
         return OAuthAttributes.builder()
-                .name((String)profile.get("nickname"))
-                .email((String)response.get("email"))
-                .picture((String)profile.get("profile_image_url"))
+                .name((String) profile.get("nickname"))
+                .email((String) response.get("email"))
+                .picture((String) profile.get("profile_image_url"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
