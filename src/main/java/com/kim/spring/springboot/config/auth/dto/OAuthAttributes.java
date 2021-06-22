@@ -32,6 +32,9 @@ public class OAuthAttributes {
         if ("kakao".equals(registrationId)) {
             return ofKakao("id", attributes);
         }
+        if ("facebook".equals(registrationId)) {
+            return ofFacebook("id", attributes);
+        }
         return ofGoogle(userNameAttributeName, attributes);
     }
 
@@ -70,6 +73,30 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+    private static OAuthAttributes ofFacebook(String userNameAttributeName, Map<String, Object> attributes) {
+        // 아래의 경우, 이메일을 반환하지 않는다.
+        // No Email address on account
+        // No confirmed email address on account
+        // No verified email address on account
+        // https://stackoverflow.com/questions/17532476/facebook-email-field-return-null-even-if-the-email-permission-is-set-and-acce
+        String email = (String) attributes.get("email");
+        if (email == null) {
+            email = ((String) attributes.get("name")) + "@facebook.com";
+        }
+
+        Map<String, Object> picture = (Map<String, Object>) attributes.get("picture");
+        Map<String, Object> picture_data = (Map<String, Object>) picture.get("data");
+        String picture_url = (String) picture_data.get("url");
+
+        return OAuthAttributes.builder()
+                .name((String) attributes.get("name"))
+                .email(email)
+                .picture(picture_url)
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
