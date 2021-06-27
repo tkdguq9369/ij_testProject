@@ -4,6 +4,7 @@ import com.kim.spring.springboot.domain.user.Role;
 import com.kim.spring.springboot.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 
@@ -79,11 +80,7 @@ public class OAuthAttributes {
     }
 
     private static OAuthAttributes ofFacebook(String userNameAttributeName, Map<String, Object> attributes) {
-        // 아래의 경우, 이메일을 반환하지 않는다.
-        // No Email address on account
-        // No confirmed email address on account
-        // No verified email address on account
-        // https://stackoverflow.com/questions/17532476/facebook-email-field-return-null-even-if-the-email-permission-is-set-and-acce
+
         String email = (String) attributes.get("email");
         if (email == null) {
             email = ((String) attributes.get("name")) + "@facebook.com";
@@ -111,4 +108,7 @@ public class OAuthAttributes {
                 .role(Role.USER)
                 .build();
     }
+
+
+
 }
